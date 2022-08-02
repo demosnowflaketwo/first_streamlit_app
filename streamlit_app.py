@@ -1,3 +1,7 @@
-import streamlit
+import streamlit as st
 
-streamlit.title ('My parents new health dinner")
+st.set_page_config(
+    page_title=APP_NAME,
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
