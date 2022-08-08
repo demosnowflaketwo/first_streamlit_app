@@ -23,7 +23,11 @@ st.dataframe(fruits_to_show)
 
 import requests
 st.header("Fruityvice Fruit Advice!")
+fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+st.write('The user entered ', fruit_choice)
+
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
+
 # st.text(fruityvice_response.json()) # this just writes the data on the screen
 
 # normalize the json data 
