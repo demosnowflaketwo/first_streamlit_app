@@ -23,7 +23,7 @@ st.dataframe(fruits_to_show)
 
 import requests
 st.header("Fruityvice Fruit Advice!")
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
 # st.text(fruityvice_response.json()) # this just writes the data on the screen
 
 # normalize the json data 
