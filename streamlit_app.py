@@ -1,9 +1,4 @@
 import streamlit as st
-import requests
-
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-streamlit.text(fruityvice_response)
-
 st.title('🥣 My healthy Diner')
 st.header('🥗Breakfast menu')
 st.text('🐔pancakes & oatmeal')
@@ -25,3 +20,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 # Display the table on the page.
 st.dataframe(fruits_to_show)
+
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response)
