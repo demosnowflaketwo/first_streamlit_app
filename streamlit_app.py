@@ -1,5 +1,8 @@
 import streamlit as st
+import requests
 
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response)
 
 st.title('🥣 My healthy Diner')
 st.header('🥗Breakfast menu')
