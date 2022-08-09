@@ -21,15 +21,18 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 st.dataframe(fruits_to_show)
 
+
+
 import requests
 st.header("Fruityvice Fruit Advice!")
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user entered ', fruit_choice)
+st.write('thank you for adding', fruit_choice)
+my_fruit_list.append(fruit_choice)
+
 
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
 
 # st.text(fruityvice_response.json()) # this just writes the data on the screen
-
 # normalize the json data 
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output as a table 
@@ -37,7 +40,7 @@ st.dataframe(fruityvice_normalized)
 
 
 add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
-st.write('The user entered ', fruit_choice)
+st.write('The user entered ', add_my_fruit)
 
 import snowflake.connector
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
