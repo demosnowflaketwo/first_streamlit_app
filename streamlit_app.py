@@ -27,7 +27,7 @@ import requests
 st.header("Fruityvice Fruit Advice!")
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
 st.write('thank you for adding', fruit_choice)
-# my_fruit_list.append(fruit_choice)
+my_cur.execute("insert into fruit_load_list values ('from streamlit')")
 
 
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
@@ -46,9 +46,7 @@ st.write('Thank you for adding', add_my_fruit)
 import snowflake.connector
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute("insert into fruit_load_list values('from streamlit')")
 # connect to snowflake and write the new fruit
 # my_cur.execute("insert into fruit_load_list values(add_my_fruit)")
-my_cur.execute("select * from fruit_load_list")
 my_data_rows = my_cur.fetchall()
 st.header("The fruit list containes:")
