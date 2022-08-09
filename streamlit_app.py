@@ -40,7 +40,9 @@ st.dataframe(fruityvice_normalized)
 
 
 add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
-st.write('The user entered ', add_my_fruit)
+st.write('Thank you for adding', add_my_fruit)
+my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+# connect to snowflake and write the new fruit
 
 import snowflake.connector
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
@@ -49,4 +51,3 @@ my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
 my_data_rows = my_cur.fetchall()
 st.header("The fruit list containes:")
-st.dataframe(my_data_rows).append({'Random': random_value}, ignore_index=True)
