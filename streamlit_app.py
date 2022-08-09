@@ -46,7 +46,7 @@ try:
 except:
   st.error()
 
-st.header("The fruit list containes:")
+st.header("view our fruit list - add your favorites")
 
 #  snowflake - related functions:
 def  get_fruit_load_list():
@@ -55,9 +55,10 @@ def  get_fruit_load_list():
         return my_cur.fetchall()
     
 #  add a button to load the fruit
-if st.button(' get fruit load list'):
+if st.button('Get fruit list'):
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
     my_data_rows = get_fruit_load_list()
+    my_cnx.close()
     st.dataframe(my_data_rows)
 
 # st.stop()
@@ -70,5 +71,6 @@ add_my_fruit = st.text_input('What fruit would you like to add?')
 if st.button('add a fruit to the list'):
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
     back_from_func = insert_row_snowflake(add_my_fruit)
+    my_cnx.close()
     st.text(back_from_func)
 
