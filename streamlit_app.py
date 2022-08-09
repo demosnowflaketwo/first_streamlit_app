@@ -27,7 +27,6 @@ import requests
 st.header("Fruityvice Fruit Advice!")
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
 st.write('thank you for adding', fruit_choice)
-my_cur.execute("insert into fruit_load_list values ('from streamlit')")
 
 
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
@@ -41,6 +40,7 @@ st.dataframe(fruityvice_normalized)
 
 add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
 st.write('Thank you for adding', add_my_fruit)
+my_cur.execute("insert into fruit_load_list values ('from streamlit')")
 
 
 import snowflake.connector
