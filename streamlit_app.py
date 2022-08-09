@@ -25,7 +25,15 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 st.dataframe(fruits_to_show)
 
 
-
+#crete function
+def get_fruitvice_data(this_fruit_choice):
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ this_fruit_choice)
+    # st.text(fruityvice_response.json()) # this just writes the data on the screen
+    # normalize the json data 
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    # output as a table 
+    st.write('thank you for adding', fruit_choice)
+    return fruityvice_normalized
 
 st.header("Fruityvice Fruit Advice!")
 try:
@@ -33,13 +41,8 @@ try:
   if not fruit_choice:
       st.error("pleasse select a fruit to get information")
   else:
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
-    # st.text(fruityvice_response.json()) # this just writes the data on the screen
-    # normalize the json data 
-    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-    # output as a table 
-    st.dataframe(fruityvice_normalized)
-    st.write('thank you for adding', fruit_choice)
+      back_from_func= get_fruitvice_data(fruit_choice)
+      st.dataframe(back_from_func)
 except:
   st.error()
 
