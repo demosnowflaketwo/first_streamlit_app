@@ -9,8 +9,6 @@ st.header('🥗Breakfast menu')
 st.text('🐔pancakes & oatmeal')
 st.text('🥑poriage')
 st.text(' 🍞banna waffle')
-
-
 st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 
@@ -30,16 +28,22 @@ st.dataframe(fruits_to_show)
 
 
 st.header("Fruityvice Fruit Advice!")
-fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-st.write('thank you for adding', fruit_choice)
+try:
+  fruit_choice = st.text_input('What fruit would you like information about?')
+  if not fruit_choice:
+      st.error("pleasse select a fruit to get information")
+  else:
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
+    # st.text(fruityvice_response.json()) # this just writes the data on the screen
+    # normalize the json data 
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    # output as a table 
+    st.dataframe(fruityvice_normalized)
+    st.write('thank you for adding', fruit_choice)
+except:
+  st.error()
 
 
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
-# st.text(fruityvice_response.json()) # this just writes the data on the screen
-# normalize the json data 
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-# output as a table 
-st.dataframe(fruityvice_normalized)
 
 st.stop()
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
